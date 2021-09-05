@@ -5,6 +5,7 @@ namespace DataGenerator
 {
     class Program
     {
+        public static DataSource source = new DataSource();
         static void Main(string[] args)
         {
             Console.WriteLine("Выберите, в каком формате вам нужны данные: ");
@@ -42,6 +43,10 @@ namespace DataGenerator
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            } finally
+            {
+                Console.ReadLine();
+
             }
         }
 
@@ -55,23 +60,21 @@ namespace DataGenerator
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
-                    DataSource source = new DataSource();
-
 
                     source.Start();
                     var service = source.data;
 
                     //Название заголовков
-                    writer.WriteLine("Имя; Отчество; Возраст; ЛОгин; Пароль");
+                    writer.WriteLine("Имя; Отчество; Возраст; Лoгин; Пароль; Почта; Пол; Серия паспорта; Номер паспорта; ИНН; Номер телефона;");
 
                     foreach (var item in service)
                     {
-                        writer.WriteLine($"{item.Name}; {item.Surname}; {item.Age}; {item.Login}; {item.Password}");
+                        writer.WriteLine($"{item.Name}; {item.Surname}; {item.Age}; {item.Login}; {item.Password}; {item.Mail}; {item.Gender}; {item.Passport_Code}; {item.Passport_Number}; {item.INN}; {item.PhoneNumber};");
                     }
-
+                    ;
                 }
             }
-        }
+        } // Можно будет совместить оба варианта (.ксв и .тхт) к одному
         
         
         public static void To_Txt()
@@ -80,18 +83,16 @@ namespace DataGenerator
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
-                    DataSource source = new DataSource();
-
-
                     source.Start();
                     var service = source.data;
 
                     //Название заголовков
-                    writer.WriteLine("Имя; Отчество; Возраст; Пароль");
+                    writer.WriteLine("Имя; Отчество; Возраст; Лoгин; Пароль; Почта; Пол; Серия паспорта; Номер паспорта; ИНН; Номер телефона;");
 
                     foreach (var item in service)
                     {
-                        writer.WriteLine($"{item.Name}, {item.Surname}, {item.Age}, {item.Password}");
+                        writer.WriteLine($"{item.Name}, {item.Surname}, {item.Age}, {item.Login}, {item.Password}, {item.Mail}, {item.Gender}, {item.Passport_Code}, {item.Passport_Number}, {item.INN}, {item.PhoneNumber},");
+                        
                     }
 
                 }

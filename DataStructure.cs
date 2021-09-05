@@ -56,6 +56,11 @@
         /// Серия паспорта
         /// </summary>
         public string Passport_Number { get; set; }
+
+        /// <summary>
+        /// Данные о номере телефона
+        /// </summary>
+        public string PhoneNumber { get; set; }
         
     }
 }
