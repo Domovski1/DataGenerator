@@ -44,12 +44,12 @@ namespace DataGenerator
 
 
         public Random rand = new Random();
-        public void Start()
+        public void Start(int Count)
         {
             FillNames(); FillSurname();
             data.Add(person_1);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < Count; i++)
             {
                 DataStructure user = new DataStructure()
                 {
