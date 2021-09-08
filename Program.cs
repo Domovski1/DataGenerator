@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
+using System.Xml.Serialization;
 
 namespace DataGenerator
 {
@@ -34,6 +35,10 @@ namespace DataGenerator
                     case "3":
                         To_json(Count);
                         Console.WriteLine("Файл сохранён на рабочем столе под названием: data.json");
+                        break;
+                    case "4":
+                        xml_serializer();
+                        Console.WriteLine("Файл сохранён на рабочем столе под названием: data.xml");
                         break;
                     default:
                         Console.WriteLine("Вы выбрали что-то другое");
@@ -93,14 +98,29 @@ namespace DataGenerator
         {
             source.Start(Count);
             var data = source.data;
+
             var option = new JsonSerializerOptions() { Encoder = JavaScriptEncoder.Create(UnicodeRanges.All) };
 
             string str = JsonSerializer.Serialize<List<DataStructure>>(data, option);
 
             File.WriteAllText($@"C:\Users\{Environment.UserName}\Desktop\data.json", str);
         }
-        
-        
+
+        private static void xml_serializer()
+        {
+            source.Start(5);
+            var data = source.data;
+            XmlSerializer formatter = new XmlSerializer(typeof(DataStructure));
+            using (FileStream fs = new FileStream($@"C:\Users\{Environment.UserName}\Desktop\data.xml", FileMode.OpenOrCreate))
+            {
+                foreach (var item in data)
+                {
+
+                    formatter.Serialize(fs, item);
+
+                }
+            }
+        }
         
     }
 }

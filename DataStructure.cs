@@ -1,6 +1,6 @@
 ﻿namespace DataGenerator
 {
-    class DataStructure
+    public class DataStructure
     {
         /// <summary>
         /// Содержит имя человека
