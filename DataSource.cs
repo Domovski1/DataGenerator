@@ -6,7 +6,7 @@ namespace DataGenerator
     class DataSource
     {
         public List<DataStructure> data = new List<DataStructure>();
-        DataStructure person_1 = new DataStructure() { Surname = "Магомедов", Name = "Мухаммад", Lastname = "Абдулаевич", Age = 22, Gender = 'M', INN = "9911368825", Login = "login", Password = "Password", Mail = "domovski@mail.ru", Passport_Code = "8212", Passport_Number = "291333" };
+        DataStructure person_me = new DataStructure() { Surname = "Магомедов", Name = "Мухаммад", Lastname = "Абдулаевич", Age = 22, Gender = 'M', INN = "9911368825", Login = "login", Password = "Password", Mail = "domovski@mail.ru", Passport_Code = "8212", Passport_Number = "291333" };
 
         
         public List<string> Names = new List<string>();
@@ -47,7 +47,7 @@ namespace DataGenerator
         public void Start(int Count)
         {
             FillNames(); FillSurname();
-            data.Add(person_1);
+            data.Add(person_me);
 
             for (int i = 0; i < Count; i++)
             {

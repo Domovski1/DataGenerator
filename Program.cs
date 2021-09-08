@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
 
 namespace DataGenerator
 {
@@ -14,20 +18,22 @@ namespace DataGenerator
             try
             {
                 string UserChoose = Console.ReadLine();
+                Console.WriteLine("Какое количество данных вам нужно?");
+                int Count = int.Parse(Console.ReadLine());
 
                 switch (UserChoose)
                 {
                     case "1":
-                        Console.WriteLine("Напишите, сколько строк данных вам нужно?");
-                        int CountOf = int.Parse(Console.ReadLine());
-                        To_CsvOrTxt(Convert.ToInt32(UserChoose), CountOf);
+                        To_CsvOrTxt(Convert.ToInt32(UserChoose), Count);
                         Console.WriteLine("Файл сохранён на рабочем столе под названием: data.csv");
                         break;
                     case "2":
-                        Console.WriteLine("Напишите, сколько строк данных вам нужно?");
-                        int Count = int.Parse(Console.ReadLine());
                         To_CsvOrTxt(Convert.ToInt32(UserChoose), Count);
                         Console.WriteLine("Файл сохранён на рабочем столе под названием: data.txt");
+                        break;
+                    case "3":
+                        To_json(Count);
+                        Console.WriteLine("Файл сохранён на рабочем столе под названием: data.json");
                         break;
                     default:
                         Console.WriteLine("Вы выбрали что-то другое");
@@ -52,14 +58,12 @@ namespace DataGenerator
         /// </summary>
         public static void To_CsvOrTxt(int UserChoice, int CountOfData)
         {
+            // Присвоение файлу формата в зависимости от выбора пользователя
             string FileFormat;
             if (UserChoice == 1)
-            {
                 FileFormat = ".csv";
-            } else
-            {
+            else
                 FileFormat = ".txt";
-            }
 
             using (FileStream stream = new FileStream($@"C:\Users\{Environment.UserName}\Desktop\data{FileFormat}", FileMode.Create))
             {
@@ -76,10 +80,25 @@ namespace DataGenerator
                     {
                         writer.WriteLine($"{item.Name}; {item.Surname}; {item.Age}; {item.Login}; {item.Password}; {item.Mail}; {item.Gender}; {item.Passport_Code}; {item.Passport_Number}; {item.INN}; {item.PhoneNumber};");
                     }
-                    ;
                 }
             }
-        } 
+        }
+
+
+        /// <summary>
+        /// Генерирует файл в формате .json
+        /// </summary>
+        /// <param name="Count">Количество строк, которые будут сформированы</param>
+        public static void To_json(int Count)
+        {
+            source.Start(Count);
+            var data = source.data;
+            var option = new JsonSerializerOptions() { Encoder = JavaScriptEncoder.Create(UnicodeRanges.All) };
+
+            string str = JsonSerializer.Serialize<List<DataStructure>>(data, option);
+
+            File.WriteAllText($@"C:\Users\{Environment.UserName}\Desktop\data.json", str);
+        }
         
         
         
