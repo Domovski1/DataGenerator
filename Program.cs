@@ -8,13 +8,7 @@ namespace DataGenerator
         public static DataSource source = new DataSource();
         static void Main(string[] args)
         {
-            Console.WriteLine("Выберите, в каком формате вам нужны данные: ");
-            Console.WriteLine("1) .csv");
-            Console.WriteLine("2) .txt");
-            Console.WriteLine("3) .json");
-            Console.WriteLine("4) .xml");
-            Console.WriteLine("5) .excel");
-            Console.WriteLine("6) .pdf");
+            Console.WriteLine($"Выберите, в каком формате вам нужны данные: \n1) .csv \n2) .txt \n3) .json \n4) .xml");
 
             Console.WriteLine();
             try
@@ -39,7 +33,6 @@ namespace DataGenerator
                         Console.WriteLine("Вы выбрали что-то другое");
                         break;
                 }
-
 
 
             }
@@ -86,7 +79,7 @@ namespace DataGenerator
                     ;
                 }
             }
-        } // Можно будет совместить оба варианта (.ксв и .тхт) к одному
+        } 
         
         
         
